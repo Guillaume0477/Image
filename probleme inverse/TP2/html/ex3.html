@@ -1,0 +1,194 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ex3</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-06-02"><meta name="DC.source" content="ex3.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">parametres</a></li><li><a href="#3">calcul de mor</a></li><li><a href="#4">descente de gradient 1d</a></li></ul></div><pre class="codeinput">clear <span class="string">all</span>; close <span class="string">all</span>;
+</pre><h2 id="2">parametres</h2><pre class="codeinput">pas=0.01;
+seuil=0.00001;
+x_ini=2;
+gamma=0.01;
+</pre><h2 id="3">calcul de mor</h2><pre class="codeinput">x_min=-5;pas_x=0.01;x_max=5;
+x=x_min:pas_x:x_max;
+z =2;
+<span class="comment">%f=abs(x);</span>
+f=abs(x-1)+abs(2*x-5);
+<span class="comment">%f=x.*x;</span>
+<span class="comment">%f=(x-z).*(x-z);</span>
+
+
+hold <span class="string">on</span>
+<span class="comment">%f1=@(x1)abs(x1);</span>
+f1=@(x1) abs(x1-1) + abs(2*x1-5);
+<span class="comment">%f1 =@(x1) x1*x1;</span>
+<span class="comment">%f1 =@(x1) (x1-z)*(x1-z);</span>
+
+<span class="comment">%prox=@(x2)(x2-gamma).*((x2-gamma)&gt;0)+(x2+gamma).*((x2+gamma)&lt;0)+(x2).*((x2)==0);</span>
+prox=@(x2)(x2+3*gamma).*(x2+3*gamma&lt;1)+(x2+gamma).*((x2+gamma)&gt;1).*((x2+gamma)&lt;5/2)+(x2-3*gamma).*(x2-3*gamma&gt;5/2)+1.*(x2&gt;=1-3*gamma).*(x2&lt;=1-gamma)+(5/2).*(x2&lt;=(5/2)+3*gamma).*(x2&gt;=(5/2)-gamma);
+<span class="comment">%prox=@(x2) x2/(1+2*gamma);</span>
+<span class="comment">%prox=@(x2) x2/(1+2*gamma);</span>
+
+<span class="comment">%moro=@(x3)abs(prox(x3)-1) + abs(2*prox(x3)-5)+(1/(2*gamma))*((-x3+prox(x3))^2);</span>
+moro=@(x3) f1(prox(x3))+ (1/(2*gamma))*((-x3+prox(x3))^2);
+
+proxi=zeros(1,length(x));
+<span class="keyword">for</span> i=1:length(x)
+    proxi(i)=prox(x(i));
+<span class="keyword">end</span>
+mor=zeros(1,length(x));
+<span class="keyword">for</span> i=1:length(x)
+    mor(i)=moro(x(i));
+<span class="keyword">end</span>
+hold <span class="string">on</span>
+plot(x,f,<span class="string">'g'</span>)
+plot(x,proxi,<span class="string">'r'</span>)
+plot(x,mor,<span class="string">'b'</span>)
+legend(<span class="string">'reel'</span>,<span class="string">'proxi'</span>,<span class="string">'morreau'</span>);
+gradmor=gradient(mor,x);
+</pre><img vspace="5" hspace="5" src="ex3_01.png" alt=""> <h2 id="4">descente de gradient 1d</h2><pre class="codeinput"><span class="comment">%plot(x_ini,moro(x_ini),'r*')</span>
+x_bar=x_ini;
+n=1;
+diff=1;
+<span class="keyword">while</span>(abs(diff(n))&gt;seuil)
+    x_bar2=x_bar(n)-pas*gradmor(round(length(x)/(x_max-x_min)*x_bar(n)+(length(x)-1)/2));
+    x_bar=[x_bar,x_bar2];
+    diff2=x_bar2-x_bar(n);
+    diff=[diff,diff2];
+    hold <span class="string">on</span>
+    <span class="comment">%plot(x_bar2,moro(x_bar2),'r*')</span>
+    n=n+1;
+<span class="keyword">end</span>
+axis([x_min x_max -inf inf])
+</pre><img vspace="5" hspace="5" src="ex3_02.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clear all; close all;
+
+%% parametres
+pas=0.01;
+seuil=0.00001;
+x_ini=2;
+gamma=0.01;
+
+%% calcul de mor
+
+x_min=-5;pas_x=0.01;x_max=5;
+x=x_min:pas_x:x_max;
+z =2;
+%f=abs(x);
+f=abs(x-1)+abs(2*x-5);
+%f=x.*x;
+%f=(x-z).*(x-z);
+
+
+hold on
+%f1=@(x1)abs(x1);
+f1=@(x1) abs(x1-1) + abs(2*x1-5);
+%f1 =@(x1) x1*x1;
+%f1 =@(x1) (x1-z)*(x1-z);
+
+%prox=@(x2)(x2-gamma).*((x2-gamma)>0)+(x2+gamma).*((x2+gamma)<0)+(x2).*((x2)==0);
+prox=@(x2)(x2+3*gamma).*(x2+3*gamma<1)+(x2+gamma).*((x2+gamma)>1).*((x2+gamma)<5/2)+(x2-3*gamma).*(x2-3*gamma>5/2)+1.*(x2>=1-3*gamma).*(x2<=1-gamma)+(5/2).*(x2<=(5/2)+3*gamma).*(x2>=(5/2)-gamma);
+%prox=@(x2) x2/(1+2*gamma);
+%prox=@(x2) x2/(1+2*gamma);
+
+%moro=@(x3)abs(prox(x3)-1) + abs(2*prox(x3)-5)+(1/(2*gamma))*((-x3+prox(x3))^2);
+moro=@(x3) f1(prox(x3))+ (1/(2*gamma))*((-x3+prox(x3))^2);
+
+proxi=zeros(1,length(x));
+for i=1:length(x)
+    proxi(i)=prox(x(i));
+end
+mor=zeros(1,length(x));
+for i=1:length(x)
+    mor(i)=moro(x(i));
+end
+hold on
+plot(x,f,'g')
+plot(x,proxi,'r')
+plot(x,mor,'b')
+legend('reel','proxi','morreau');
+gradmor=gradient(mor,x);
+
+%% descente de gradient 1d
+
+
+
+%plot(x_ini,moro(x_ini),'r*')
+x_bar=x_ini;
+n=1;
+diff=1;
+while(abs(diff(n))>seuil)
+    x_bar2=x_bar(n)-pas*gradmor(round(length(x)/(x_max-x_min)*x_bar(n)+(length(x)-1)/2));
+    x_bar=[x_bar,x_bar2];
+    diff2=x_bar2-x_bar(n);
+    diff=[diff,diff2];
+    hold on
+    %plot(x_bar2,moro(x_bar2),'r*')
+    n=n+1;
+end
+axis([x_min x_max -inf inf])
+##### SOURCE END #####
+--></body></html>

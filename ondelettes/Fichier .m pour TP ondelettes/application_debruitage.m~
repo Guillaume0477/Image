@@ -1,0 +1,71 @@
+% application au debruitage d'une image
+
+
+Ingrid = ReadImage('Daubechies');
+NoisyIngrid = Ingrid + 5*WhiteNoise(Ingrid);
+subplot(231);
+imshow(I
+subplot(232);
+
+
+
+CoifQMF = MakeONFilter('Coiflet',3);
+
+transfo_img = FWT2_PO(NoisyIngrid,L_i,CoifQMF);
+
+
+
+
+
+
+
+
+
+
+
+
+% 
+% 
+% 
+% CoifQMF = MakeONFilter('Coiflet',3);
+% figure(1);
+% subplot(231);
+% J = 8;
+% L = 5;
+% dirac=zeros(1,2^J);
+% dirac(17)=1;
+% transfo_inverse = IWT_PO(dirac,L,CoifQMF);
+% plot(transfo_inverse);
+% title('Transfo inverse d un dirac en 1D');
+% 
+% 
+% J_i=8;
+% L_i=7;
+% dirac2D = zeros(256,256);
+% dirac2D(100,:)=1;
+% dirac2D(:,100)=1;
+% transfo_inverse_2D = IWT2_PO(dirac2D,L_i,CoifQMF);
+% subplot(232);
+% imshow(transfo_inverse_2D,[]);
+% title('Transfo inverse d un dirac en 2D');
+% 
+% 
+% subplot(233);
+% I_entier=imread('cameraman.tiff');
+% I=double(I_entier);
+% imshow(I_entier,[]);
+% title('image originale');
+% 
+% transfo_img = FWT2_PO(I,L_i,CoifQMF);
+% 
+% transfo_inv_img = IWT2_PO(transfo_img,L_i,CoifQMF);
+% subplot(234);
+% transfo_inv_img_int = uint8(transfo_inv_img);
+% imshow(transfo_inv_img_int,[]);
+% 
+% diff = I_entier - transfo_inv_img_int;
+% 
+% 
+
+
+

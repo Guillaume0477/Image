@@ -1,0 +1,273 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Exercice2</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-07"><meta name="DC.source" content="Exercice2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput">clear <span class="string">all</span>; close <span class="string">all</span>;
+
+Y=     [68	76	127	60	72	68	84	68	82;
+        2	4	3	3	2	3	2	2	4;
+        81	74	41	81	101	102	111	68	70;
+        36	34	31	37	35	40	42	44	24;
+        64	115	172	82	60	76	83	57	237;
+        89	53	69	84	64	33	30	38	57;
+        25	93	87	13	66	6	3	14	45;
+        6	12	20	4	4	8	8	7	22;
+        7	3	1	12	10	6	4	12	1;
+        24	33	25	21	28	23	23	13	20;
+        58	38	24	41	41	26	32	51	18;
+        84	90	80	136	87	14	14	9	13;
+        85	91	84	135	89	134	187	159	64;
+        6	7	2	3	8	5	11	6	1;
+        12	18	13	13	10	6	3	10	8;
+        17	15	11	11	14	14	14	14	12];
+
+tab_1={ <span class="string">'RFA'</span> 3;
+        <span class="string">'France'</span> 6;
+        <span class="string">'Italie'</span> 6;
+        <span class="string">'Pays Bas'</span> 8;
+        <span class="string">'Belg. Lux.'</span> 10;
+        <span class="string">'Russie'</span> 6;
+        <span class="string">'Irlande'</span> 7;
+        <span class="string">'Danemark'</span> 8;
+        <span class="string">'Gr&egrave;ce'</span> 5};
+
+tab_2={ <span class="string">'C&eacute;r&eacute;ales'</span> 8;
+    <span class="string">'Riz'</span> 3;
+    <span class="string">'Pommes de terre'</span> 14;
+    <span class="string">'Sucre blanc'</span> 11;
+    <span class="string">'L&eacute;gumes'</span> 7;
+    <span class="string">'Fruits'</span> 6;
+    <span class="string">'Vin'</span> 3;
+    <span class="string">'Huiles v&eacute;g&eacute;tales'</span> 16;
+    <span class="string">'Margarine'</span> 9;
+    <span class="string">'Viande bov.'</span> 11;
+    <span class="string">'Viande porc.'</span> 12;
+    <span class="string">'Volailles'</span> 9;
+    <span class="string">'Lait et d&eacute;riv.'</span> 14;
+    <span class="string">'Beurre'</span> 6;
+    <span class="string">'Fromages'</span> 8;
+    <span class="string">'Oeufs'</span> 5 };
+
+Y = Y';
+[n,m]=size(Y); <span class="comment">%Nombres de donnees et de variables statistiques</span>
+
+X=zeros(n,m); <span class="comment">%initialisation de la matrice des donnees centrees</span>
+moy=mean(Y); <span class="comment">%Vecteur des moyennes de chaque colonne</span>
+<span class="keyword">for</span> i = (1:m) <span class="comment">%Calcul de la matrice des donnees centrees</span>
+    X(:,i)=Y(:,i)-moy(i);
+<span class="keyword">end</span>
+
+M=1/n*(X'*X); <span class="comment">%Calcul de la matrice de covariance</span>
+[V,D]=eig(M); <span class="comment">%Diagonalisation de M</span>
+
+lambda=flipud(diag(D));  <span class="comment">%Valeurs propres dans l'ordre d&Atilde;&copy;croissant</span>
+P=fliplr(V); <span class="comment">%Rangement des vecteurs propres dans l'ordre des valeurs propres</span>
+
+figure(2)
+plot(lambda,<span class="string">'b-*'</span>) <span class="comment">%Affichage des valeurs propres</span>
+axis([-inf,inf,-inf,inf])
+title(<span class="string">'Affichage des valeurs propres'</span>);
+
+
+tau=zeros(1,m); <span class="comment">%Initialisation du vecteur des taux d'inertie</span>
+<span class="keyword">for</span> i=1:16 <span class="comment">%Calcul des taux d'inertie</span>
+    tau(i)=lambda(i)/sum(lambda);
+<span class="keyword">end</span>
+Xstar=X*P;
+
+figure(3)
+plot(Xstar(:,1),Xstar(:,3),<span class="string">'bo'</span>);
+text(Xstar(:,1)+0.05,Xstar(:,3),tab_1(:,1));
+<span class="comment">%axis([-8,10,-6,8])</span>
+grid()
+xlabel(<span class="string">'e1 (52.05 %)'</span>)
+ylabel(<span class="string">'e3 (6.76 %)'</span>)
+title(<span class="string">'analyse en composante principale'</span>);
+
+sigma=std(Y);
+Z=X*diag(1./sigma);
+r1=(1/(n*sqrt(lambda(1))))*Z'*Xstar(:,1);
+r2=(1/(n*sqrt(lambda(2))))*Z'*Xstar(:,3);
+
+figure(4);
+hold <span class="string">on</span>;
+theta=0:0.1:360;
+crlx=cos(theta);
+crly=sin(theta);
+plot(r1,r2,<span class="string">'ro'</span>)
+axis <span class="string">equal</span>
+text(r1+0.05,r2,tab_2(:,1));
+plot(crlx,crly,<span class="string">'black'</span>);
+grid()
+xlabel(<span class="string">'e1 (52.05 %)'</span>)
+ylabel(<span class="string">'e3 (6.76 %)'</span>)
+title(<span class="string">'Cercle des corr&eacute;lations'</span>);
+</pre><img vspace="5" hspace="5" src="Exercice2_01.png" alt=""> <img vspace="5" hspace="5" src="Exercice2_02.png" alt=""> <img vspace="5" hspace="5" src="Exercice2_03.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clear all; close all;
+
+Y=     [68	76	127	60	72	68	84	68	82;
+        2	4	3	3	2	3	2	2	4;
+        81	74	41	81	101	102	111	68	70;
+        36	34	31	37	35	40	42	44	24;
+        64	115	172	82	60	76	83	57	237;
+        89	53	69	84	64	33	30	38	57;
+        25	93	87	13	66	6	3	14	45;
+        6	12	20	4	4	8	8	7	22;
+        7	3	1	12	10	6	4	12	1;
+        24	33	25	21	28	23	23	13	20;
+        58	38	24	41	41	26	32	51	18;
+        84	90	80	136	87	14	14	9	13;
+        85	91	84	135	89	134	187	159	64;
+        6	7	2	3	8	5	11	6	1;
+        12	18	13	13	10	6	3	10	8;
+        17	15	11	11	14	14	14	14	12];
+    
+tab_1={ 'RFA' 3;
+        'France' 6;
+        'Italie' 6;
+        'Pays Bas' 8;
+        'Belg. Lux.' 10;	
+        'Russie' 6;
+        'Irlande' 7;
+        'Danemark' 8;	
+        'Grèce' 5}; 
+    
+tab_2={ 'Céréales' 8;
+    'Riz' 3;
+    'Pommes de terre' 14;
+    'Sucre blanc' 11;
+    'Légumes' 7;
+    'Fruits' 6;
+    'Vin' 3;
+    'Huiles végétales' 16;
+    'Margarine' 9;
+    'Viande bov.' 11;
+    'Viande porc.' 12;
+    'Volailles' 9;
+    'Lait et dériv.' 14;
+    'Beurre' 6;
+    'Fromages' 8;
+    'Oeufs' 5 }; 
+
+Y = Y';   
+[n,m]=size(Y); %Nombres de donnees et de variables statistiques
+
+X=zeros(n,m); %initialisation de la matrice des donnees centrees
+moy=mean(Y); %Vecteur des moyennes de chaque colonne
+for i = (1:m) %Calcul de la matrice des donnees centrees
+    X(:,i)=Y(:,i)-moy(i);
+end
+
+M=1/n*(X'*X); %Calcul de la matrice de covariance
+[V,D]=eig(M); %Diagonalisation de M
+
+lambda=flipud(diag(D));  %Valeurs propres dans l'ordre dÃ©croissant
+P=fliplr(V); %Rangement des vecteurs propres dans l'ordre des valeurs propres
+
+figure(2)
+plot(lambda,'b-*') %Affichage des valeurs propres
+axis([-inf,inf,-inf,inf])
+title('Affichage des valeurs propres');
+
+
+tau=zeros(1,m); %Initialisation du vecteur des taux d'inertie
+for i=1:16 %Calcul des taux d'inertie
+    tau(i)=lambda(i)/sum(lambda);
+end
+Xstar=X*P;
+
+figure(3)
+plot(Xstar(:,1),Xstar(:,3),'bo');
+text(Xstar(:,1)+0.05,Xstar(:,3),tab_1(:,1));
+%axis([-8,10,-6,8])
+grid()
+xlabel('e1 (52.05 %)')
+ylabel('e3 (6.76 %)')
+title('analyse en composante principale');
+
+sigma=std(Y);
+Z=X*diag(1./sigma);
+r1=(1/(n*sqrt(lambda(1))))*Z'*Xstar(:,1);
+r2=(1/(n*sqrt(lambda(2))))*Z'*Xstar(:,3);
+
+figure(4);
+hold on;
+theta=0:0.1:360;
+crlx=cos(theta);
+crly=sin(theta);
+plot(r1,r2,'ro')
+axis equal
+text(r1+0.05,r2,tab_2(:,1));
+plot(crlx,crly,'black');
+grid()
+xlabel('e1 (52.05 %)')
+ylabel('e3 (6.76 %)')
+title('Cercle des corrélations');
+
+##### SOURCE END #####
+--></body></html>
